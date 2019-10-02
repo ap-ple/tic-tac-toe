@@ -34,7 +34,7 @@ def wincon(board, player):
 
 play_board = [l for l in '---------']
 
-system('cls')
+cls()
 dialogue('Welcome to Tic-Tac-Toe! (Press enter to continue)')
 
 if dialogue('To skip the instructions, type skip, or press enter to continue ').lower() != 'skip':
@@ -80,7 +80,7 @@ while True:
 		while True:
 			display_board(play_board)
 			choice = num_input(f'Player {player}, choose your index (1-9): ')
-			system('cls')
+			cls()
 			if choice == 0 or choice > 9:
 				print('Please choose a number from 1-9.')
 				continue
