@@ -1,5 +1,4 @@
 #used to clear the screen
-from os import system
 from stuff import *
 
 #used to display the playing board
@@ -34,7 +33,7 @@ def wincon(board, player):
 
 play_board = [l for l in '---------']
 
-cls()
+clear()
 dialogue('Welcome to Tic-Tac-Toe! (Press enter to continue)')
 
 if dialogue('To skip the instructions, type skip, or press enter to continue ').lower() != 'skip':
@@ -80,7 +79,7 @@ while True:
 		while True:
 			display_board(play_board)
 			choice = num_input(f'Player {player}, choose your index (1-9): ')
-			cls()
+			clear()
 			if choice == 0 or choice > 9:
 				print('Please choose a number from 1-9.')
 				continue
