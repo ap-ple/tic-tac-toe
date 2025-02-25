@@ -39,8 +39,6 @@ const mainGameboard = (function(root) {
       spaceElement.innerText = ""
    });
 
-   resetBoard();
-
    return {board, boardSize, checkWin, disableBoard, resetBoard};
 })(document);
 
