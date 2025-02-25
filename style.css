@@ -36,6 +36,10 @@ body>main>.gameboard>button {
    background: white;
 }
 
+body>main>.gameboard>button:focus-visible {
+   outline: dashed white;
+}
+
 body>main>.gameboard>button:hover {
    cursor: pointer;
    opacity: 95%;
