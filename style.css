@@ -31,7 +31,7 @@ body>main>.gameboard {
 body>main>.gameboard>button {
    font-size: 2rem;
    width: 6rem;
-   aspect-ratio: 1 / 1;
+   aspect-ratio: 1;
    border: none;
    background: white;
 }
