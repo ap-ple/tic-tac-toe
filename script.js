@@ -70,5 +70,13 @@ const mainGame = (function(root, gameboard) {
       spaceElement.addEventListener("click", event => play(spaceElement));
    });
 
+   const resetElement = root.querySelector("body>main>button.reset");
+
+   resetElement.addEventListener("click", event => {
+      turn = 0;
+      messageElement.innerText = `Your turn, Player ${symbolThisTurn()}.`;
+      gameboard.resetBoard();
+   });
+
    return {turn, symbolThisTurn};
 })(document, mainGameboard);

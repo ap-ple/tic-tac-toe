@@ -4,6 +4,10 @@
    margin: 0;
 }
 
+button:hover {
+   cursor: pointer;
+}
+
 body {
    display: flex;
    flex-flow: column;
@@ -41,7 +45,6 @@ body>main>.gameboard>button:focus-visible {
 }
 
 body>main>.gameboard>button:hover {
-   cursor: pointer;
    opacity: 95%;
 }
 
@@ -49,4 +52,8 @@ body>main>.gameboard>button:disabled {
    cursor: inherit;
    color: inherit;
    opacity: inherit;
+}
+
+body>main>button.reset {
+   padding: 0.5rem;
 }
