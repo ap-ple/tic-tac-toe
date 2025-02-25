@@ -27,13 +27,11 @@ const mainGame = (function(root, gameboard) {
    const messageElement = root.querySelector("body>main>.message");
 
    const play = (spaceElement) => {
-      if (spaceElement.innerText.length === 0) {
-         spaceElement.innerText = symbols[turn % symbols.length];
-         spaceElement.disabled = true;
-         turn++;
+      spaceElement.innerText = symbols[turn % symbols.length];
+      spaceElement.disabled = true;
+      turn++;
 
-         messageElement.innerText = `Your turn, Player ${symbols[turn % symbols.length]}.`;
-      }
+      messageElement.innerText = `Your turn, Player ${symbols[turn % symbols.length]}.`;
    };
 
    gameboard.board.forEach(spaceElement => {
