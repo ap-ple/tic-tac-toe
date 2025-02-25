@@ -10,7 +10,7 @@ const gameboard = (function(root) {
       boardElement.appendChild(element);
    }
 
-   const resetBoard = () => board.map(element => element.innerText = "X");
+   const resetBoard = () => board.map(element => element.innerText = "");
 
    resetBoard();
 

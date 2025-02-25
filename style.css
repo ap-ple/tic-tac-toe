@@ -10,11 +10,14 @@ body {
    height: 100vh;
    align-items: center;
    justify-content: center;
+   gap: 2rem;
 }
 
 body>main>.gameboard {
    display: grid;
    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+   background: black;
+   gap: 1px;
 }
 
 body>main>.gameboard>button {
@@ -22,7 +25,7 @@ body>main>.gameboard>button {
    width: 6rem;
    aspect-ratio: 1 / 1;
    border: none;
-   background: none;
+   background: white;
 }
 
 body>main>.gameboard>button:hover {
