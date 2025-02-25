@@ -54,11 +54,17 @@ const mainGameboard = (function(rootElement, boardSize) {
 })(document, defaultBoardSize);
 
 const mainGame = (function(rootElement, gameboard, players) {
-   let turn = 0;
-
-   const playerThisTurn = () => players[turn % players.length];
+   let turn;
 
    const messageElement = rootElement.querySelector("body>main>.message");
+   
+   const playerThisTurn = () => players[turn % players.length];
+
+   const startGame = () => {
+      turn = 0;
+      messageElement.innerText = `Your turn, ${playerThisTurn().name}.`;
+      gameboard.resetBoard();
+   }
 
    const play = (spaceElement) => {
       spaceElement.innerText = playerThisTurn().symbol;
@@ -82,11 +88,9 @@ const mainGame = (function(rootElement, gameboard, players) {
 
    const resetElement = rootElement.querySelector("body>main>button.reset");
 
-   resetElement.addEventListener("click", event => {
-      turn = 0;
-      messageElement.innerText = `Your turn, ${playerThisTurn().name}.`;
-      gameboard.resetBoard();
-   });
+   resetElement.addEventListener("click", event => startGame());
 
-   return {playerThisTurn};
+   return {startGame};
 })(document, mainGameboard, defaultPlayers);
+
+mainGame.startGame();
