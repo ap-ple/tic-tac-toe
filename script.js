@@ -70,5 +70,5 @@ const mainGame = (function(root, gameboard) {
       spaceElement.addEventListener("click", event => play(spaceElement));
    });
 
-   return {};
+   return {turn, symbolThisTurn};
 })(document, mainGameboard);
