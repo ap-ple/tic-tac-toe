@@ -21,12 +21,12 @@ const mainGameboard = (function(root) {
 })(document);
 
 const mainGame = (function(root, gameboard) {
-   const symbols = ["O", "X"]
+   const symbols = ["X", "O"]
    let turn = 1;
 
    const play = (slotElement) => {
       if (slotElement.innerText.length === 0) {
-         slotElement.innerText = symbols[turn % symbols.length];
+         slotElement.innerText = symbols[(turn - 1) % symbols.length];
          slotElement.disabled = true;
          turn++;
       }
