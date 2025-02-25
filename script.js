@@ -54,7 +54,7 @@ const mainGameboard = (function(rootElement, boardSize) {
 })(document, BOARD_SIZE);
 
 const mainGame = (function(rootElement, gameboard, players) {
-   let turn;
+   let turn = 0;
 
    const messageElement = rootElement.querySelector("body>main>.message");
    
