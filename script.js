@@ -12,7 +12,7 @@ const mainGameboard = (function(root) {
       boardElement.appendChild(spaceElement);
    }
 
-   const checkWin = (spaceElement) => {
+   const win = (spaceElement) => {
       const symbol = spaceElement.innerText;
       const spaceIndex = board.indexOf(spaceElement);
       const x = Math.floor(spaceIndex % boardSize);
@@ -39,7 +39,7 @@ const mainGameboard = (function(root) {
       spaceElement.innerText = ""
    });
 
-   return {board, boardSize, checkWin, disableBoard, resetBoard};
+   return {board, boardSize, win, disableBoard, resetBoard};
 })(document);
 
 const mainGame = (function(root, gameboard) {
@@ -54,7 +54,7 @@ const mainGame = (function(root, gameboard) {
       spaceElement.innerText = symbolThisTurn();
       spaceElement.disabled = true;
       
-      if (gameboard.checkWin(spaceElement)) {
+      if (gameboard.win(spaceElement)) {
          messageElement.innerText = `Player ${symbolThisTurn()} wins!`;
          gameboard.disableBoard();
       }
