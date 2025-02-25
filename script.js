@@ -1,4 +1,13 @@
 
+const Player = function(name, symbol) {
+   return {name, symbol};
+}
+
+const defaultSymbols = ["X", "O"];
+const defaultPlayers = defaultSymbols.map(symbol => {
+   new Player(`Player ${symbol}`, symbol)
+});
+
 const mainGameboard = (function(root) {
    const boardSize = 3;
 
@@ -42,27 +51,26 @@ const mainGameboard = (function(root) {
    return {board, boardSize, win, disableBoard, resetBoard};
 })(document);
 
-const mainGame = (function(root, gameboard) {
-   const symbols = ["X", "O"]
+const mainGame = (function(root, gameboard, players) {
    let turn = 0;
 
-   const symbolThisTurn = () => symbols[turn % symbols.length];
+   const playerThisTurn = () => players[turn % players.length];
 
    const messageElement = root.querySelector("body>main>.message");
 
    const play = (spaceElement) => {
-      spaceElement.innerText = symbolThisTurn();
+      spaceElement.innerText = playerThisTurn().symbol;
       spaceElement.disabled = true;
       
       if (gameboard.win(spaceElement)) {
-         messageElement.innerText = `Player ${symbolThisTurn()} wins!`;
+         messageElement.innerText = `${playerThisTurn().name} wins!`;
          gameboard.disableBoard();
       }
       else if (++turn >= gameboard.boardSize ** 2) {
          messageElement.innerText = "Tie!";
       }
       else {
-         messageElement.innerText = `Your turn, Player ${symbolThisTurn()}.`;
+         messageElement.innerText = `Your turn, ${playerThisTurn().name}.`;
       }
    }
 
@@ -74,9 +82,9 @@ const mainGame = (function(root, gameboard) {
 
    resetElement.addEventListener("click", event => {
       turn = 0;
-      messageElement.innerText = `Your turn, Player ${symbolThisTurn()}.`;
+      messageElement.innerText = `Your turn, ${playerThisTurn().name}.`;
       gameboard.resetBoard();
    });
 
-   return {turn, symbolThisTurn};
-})(document, mainGameboard);
+   return {playerThisTurn};
+})(document, mainGameboard, defaultPlayers);
