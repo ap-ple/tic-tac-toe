@@ -35,8 +35,8 @@ const mainGameboard = (function(root) {
    });
 
    const resetBoard = () => board.map(spaceElement => {
-      spaceElement.innerText = ""
       spaceElement.disabled = false;
+      spaceElement.innerText = ""
    });
 
    resetBoard();
