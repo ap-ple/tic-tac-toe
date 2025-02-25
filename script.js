@@ -14,5 +14,5 @@ const gameboard = (function(root) {
 
    resetBoard();
 
-   return {board, resetBoard};
+   return {resetBoard};
 })(document);
