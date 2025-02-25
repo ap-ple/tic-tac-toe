@@ -3,13 +3,13 @@ const Player = function(name, symbol) {
    return {name, symbol};
 }
 
-const defaultBoardSize = 3;
+const BOARD_SIZE = 3;
 
-const defaultSymbols = ["X", "O"];
-const defaultPlayers = [];
+const SYMBOLS = ["X", "O"];
+const PLAYERS = [];
 
-defaultSymbols.forEach(symbol => {
-   defaultPlayers.push(new Player(`Player ${symbol}`, symbol));
+SYMBOLS.forEach(symbol => {
+   PLAYERS.push(new Player(`Player ${symbol}`, symbol));
 });
 
 const mainGameboard = (function(rootElement, boardSize) {
@@ -51,7 +51,7 @@ const mainGameboard = (function(rootElement, boardSize) {
    });
 
    return {board, boardSize, win, disableBoard, resetBoard};
-})(document, defaultBoardSize);
+})(document, BOARD_SIZE);
 
 const mainGame = (function(rootElement, gameboard, players) {
    let turn;
@@ -91,6 +91,6 @@ const mainGame = (function(rootElement, gameboard, players) {
    resetElement.addEventListener("click", event => startGame());
 
    return {startGame};
-})(document, mainGameboard, defaultPlayers);
+})(document, mainGameboard, PLAYERS);
 
 mainGame.startGame();
