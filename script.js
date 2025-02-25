@@ -26,8 +26,9 @@ const mainGame = (function(root, gameboard) {
 
    const play = (slotElement) => {
       if (slotElement.innerText.length === 0) {
-         slotElement.innerText = symbols[turn++ % symbols.length];
+         slotElement.innerText = symbols[turn % symbols.length];
          slotElement.disabled = true;
+         turn++;
       }
    };
 
