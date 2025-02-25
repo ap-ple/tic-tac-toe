@@ -1,6 +1,8 @@
 
 const mainGameboard = (function(root) {
-   const board = Array(9);
+   const boardSize = 3;
+
+   const board = Array(boardSize ** 2);
    
    const boardElement = root.querySelector("body>main>.gameboard");
    
@@ -10,8 +12,22 @@ const mainGameboard = (function(root) {
       boardElement.appendChild(spaceElement);
    }
 
-   const checkWin = symbol => {
-      // TODO: implement
+   const checkWin = (spaceElement) => {
+      const symbol = spaceElement.innerText;
+      const spaceIndex = board.indexOf(spaceElement);
+      const x = Math.floor(spaceIndex % boardSize);
+      const y = Math.floor(spaceIndex / boardSize);
+
+      let column = row = diagonal = diagonalReverse = 0;
+
+      for (let i = 0; i < boardSize; i++) {
+         if (symbol === board[x + i * boardSize].innerText) column++;
+         if (symbol === board[i + y * boardSize].innerText) row++;
+         if (symbol === board[i + i * boardSize].innerText) diagonal++;
+         if (symbol === board[i + (boardSize - i - 1) * boardSize].innerText) diagonalReverse++;
+      }
+
+      return [column, row, diagonal, diagonalReverse].indexOf(boardSize) > -1;
    }
 
    const disableBoard = () => board.map(spaceElement => {
@@ -25,7 +41,7 @@ const mainGameboard = (function(root) {
 
    resetBoard();
 
-   return {board, resetBoard, checkWin, disableBoard};
+   return {board, boardSize, checkWin, disableBoard, resetBoard};
 })(document);
 
 const mainGame = (function(root, gameboard) {
@@ -40,11 +56,11 @@ const mainGame = (function(root, gameboard) {
       spaceElement.innerText = symbolThisTurn();
       spaceElement.disabled = true;
       
-      if (gameboard.checkWin(symbolThisTurn())) {
+      if (gameboard.checkWin(spaceElement)) {
          messageElement.innerText = `Player ${symbolThisTurn()} wins!`;
          gameboard.disableBoard();
       }
-      else if (++turn >= 9) {
+      else if (++turn >= gameboard.boardSize ** 2) {
          messageElement.innerText = "Tie!";
       }
       else {
@@ -53,7 +69,7 @@ const mainGame = (function(root, gameboard) {
    }
 
    gameboard.board.forEach(spaceElement => {
-      spaceElement.addEventListener("click", event => play(event.target));
+      spaceElement.addEventListener("click", event => play(spaceElement));
    });
 
    return {};
