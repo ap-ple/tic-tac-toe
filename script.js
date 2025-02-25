@@ -3,6 +3,8 @@ const Player = function(name, symbol) {
    return {name, symbol};
 }
 
+const defaultBoardSize = 3;
+
 const defaultSymbols = ["X", "O"];
 const defaultPlayers = [];
 
@@ -10,9 +12,7 @@ defaultSymbols.forEach(symbol => {
    defaultPlayers.push(new Player(`Player ${symbol}`, symbol));
 });
 
-const mainGameboard = (function(rootElement) {
-   const boardSize = 3;
-
+const mainGameboard = (function(rootElement, boardSize) {
    const board = Array(boardSize ** 2);
    
    const boardElement = rootElement.querySelector("body>main>.gameboard");
@@ -51,7 +51,7 @@ const mainGameboard = (function(rootElement) {
    });
 
    return {board, boardSize, win, disableBoard, resetBoard};
-})(document);
+})(document, defaultBoardSize);
 
 const mainGame = (function(rootElement, gameboard, players) {
    let turn = 0;
