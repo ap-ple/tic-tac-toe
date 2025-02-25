@@ -10,6 +10,14 @@ const mainGameboard = (function(root) {
       boardElement.appendChild(spaceElement);
    }
 
+   const checkWin = symbol => {
+      // TODO: implement
+   }
+
+   const disableBoard = () => board.map(spaceElement => {
+      spaceElement.disabled = true;
+   });
+
    const resetBoard = () => board.map(spaceElement => {
       spaceElement.innerText = ""
       spaceElement.disabled = false;
@@ -17,22 +25,32 @@ const mainGameboard = (function(root) {
 
    resetBoard();
 
-   return {board, resetBoard};
+   return {board, resetBoard, checkWin, disableBoard};
 })(document);
 
 const mainGame = (function(root, gameboard) {
    const symbols = ["X", "O"]
    let turn = 0;
 
+   const symbolThisTurn = () => symbols[turn % symbols.length];
+
    const messageElement = root.querySelector("body>main>.message");
 
    const play = (spaceElement) => {
-      spaceElement.innerText = symbols[turn % symbols.length];
+      spaceElement.innerText = symbolThisTurn();
       spaceElement.disabled = true;
-      turn++;
-
-      messageElement.innerText = `Your turn, Player ${symbols[turn % symbols.length]}.`;
-   };
+      
+      if (gameboard.checkWin(symbolThisTurn())) {
+         messageElement.innerText = `Player ${symbolThisTurn()} wins!`;
+         gameboard.disableBoard();
+      }
+      else if (++turn >= 9) {
+         messageElement.innerText = "Tie!";
+      }
+      else {
+         messageElement.innerText = `Your turn, Player ${symbolThisTurn()}.`;
+      }
+   }
 
    gameboard.board.forEach(spaceElement => {
       spaceElement.addEventListener("click", event => play(event.target));
