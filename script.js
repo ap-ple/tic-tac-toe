@@ -22,17 +22,17 @@ const mainGameboard = (function(root) {
 
 const mainGame = (function(root, gameboard) {
    const symbols = ["X", "O"]
-   let turn = 1;
+   let turn = 0;
 
    const messageElement = root.querySelector("body>main>.message");
 
    const play = (slotElement) => {
       if (slotElement.innerText.length === 0) {
-         slotElement.innerText = symbols[(turn - 1) % symbols.length];
+         slotElement.innerText = symbols[turn % symbols.length];
          slotElement.disabled = true;
          turn++;
 
-         messageElement.innerText = `Your turn, Player ${symbols[(turn - 1) % symbols.length]}.`;
+         messageElement.innerText = `Your turn, Player ${symbols[turn % symbols.length]}.`;
       }
    };
 
