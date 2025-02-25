@@ -31,3 +31,8 @@ body>main>.gameboard>button {
 body>main>.gameboard>button:hover {
    cursor: pointer;
 }
+
+body>main>.gameboard>button:disabled {
+   cursor: inherit;
+   color: inherit;
+}
