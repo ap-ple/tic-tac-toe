@@ -5,14 +5,14 @@ const mainGameboard = (function(root) {
    let boardElement = root.querySelector("body>main>.gameboard");
    
    for (let i = 0; i < board.length; i++) {
-      let slotElement = root.createElement("button");
-      board[i] = slotElement;
-      boardElement.appendChild(slotElement);
+      let spaceElement = root.createElement("button");
+      board[i] = spaceElement;
+      boardElement.appendChild(spaceElement);
    }
 
-   const resetBoard = () => board.map(element => {
-      element.innerText = ""
-      element.disabled = false;
+   const resetBoard = () => board.map(spaceElement => {
+      spaceElement.innerText = ""
+      spaceElement.disabled = false;
    });
 
    resetBoard();
@@ -26,18 +26,18 @@ const mainGame = (function(root, gameboard) {
 
    const messageElement = root.querySelector("body>main>.message");
 
-   const play = (slotElement) => {
-      if (slotElement.innerText.length === 0) {
-         slotElement.innerText = symbols[turn % symbols.length];
-         slotElement.disabled = true;
+   const play = (spaceElement) => {
+      if (spaceElement.innerText.length === 0) {
+         spaceElement.innerText = symbols[turn % symbols.length];
+         spaceElement.disabled = true;
          turn++;
 
          messageElement.innerText = `Your turn, Player ${symbols[turn % symbols.length]}.`;
       }
    };
 
-   gameboard.board.forEach(element => {
-      element.addEventListener("click", event => play(event.target));
+   gameboard.board.forEach(spaceElement => {
+      spaceElement.addEventListener("click", event => play(event.target));
    });
 
    return {};
