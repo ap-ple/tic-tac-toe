@@ -25,7 +25,7 @@ body>main>.gameboard {
    display: grid;
    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
    background: black;
-   gap: 1px;
+   gap: 0.125rem;
 }
 
 body>main>.gameboard>button {
