@@ -8,15 +8,15 @@ const defaultPlayers = defaultSymbols.map(symbol => {
    new Player(`Player ${symbol}`, symbol)
 });
 
-const mainGameboard = (function(root) {
+const mainGameboard = (function(rootElement) {
    const boardSize = 3;
 
    const board = Array(boardSize ** 2);
    
-   const boardElement = root.querySelector("body>main>.gameboard");
+   const boardElement = rootElement.querySelector("body>main>.gameboard");
    
    for (let i = 0; i < board.length; i++) {
-      const spaceElement = root.createElement("button");
+      const spaceElement = rootElement.createElement("button");
       board[i] = spaceElement;
       boardElement.appendChild(spaceElement);
    }
@@ -51,12 +51,12 @@ const mainGameboard = (function(root) {
    return {board, boardSize, win, disableBoard, resetBoard};
 })(document);
 
-const mainGame = (function(root, gameboard, players) {
+const mainGame = (function(rootElement, gameboard, players) {
    let turn = 0;
 
    const playerThisTurn = () => players[turn % players.length];
 
-   const messageElement = root.querySelector("body>main>.message");
+   const messageElement = rootElement.querySelector("body>main>.message");
 
    const play = (spaceElement) => {
       spaceElement.innerText = playerThisTurn().symbol;
@@ -78,7 +78,7 @@ const mainGame = (function(root, gameboard, players) {
       spaceElement.addEventListener("click", event => play(spaceElement));
    });
 
-   const resetElement = root.querySelector("body>main>button.reset");
+   const resetElement = rootElement.querySelector("body>main>button.reset");
 
    resetElement.addEventListener("click", event => {
       turn = 0;
