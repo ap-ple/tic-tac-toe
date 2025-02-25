@@ -38,9 +38,11 @@ body>main>.gameboard>button {
 
 body>main>.gameboard>button:hover {
    cursor: pointer;
+   opacity: 95%;
 }
 
 body>main>.gameboard>button:disabled {
    cursor: inherit;
    color: inherit;
+   opacity: inherit;
 }
