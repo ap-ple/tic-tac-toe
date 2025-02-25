@@ -4,8 +4,10 @@ const Player = function(name, symbol) {
 }
 
 const defaultSymbols = ["X", "O"];
-const defaultPlayers = defaultSymbols.map(symbol => {
-   new Player(`Player ${symbol}`, symbol)
+const defaultPlayers = [];
+
+defaultSymbols.forEach(symbol => {
+   defaultPlayers.push(new Player(`Player ${symbol}`, symbol));
 });
 
 const mainGameboard = (function(rootElement) {
