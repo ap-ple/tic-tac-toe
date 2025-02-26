@@ -84,11 +84,14 @@ const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
          for (let j = 0; j < elements.length; j++) {
             const element = elements[j];
             const lines = linesArray[j];
-            if (element !== null && element.innerText === symbol) {
-               lines.at(-1).push(element);
-            }
-            else if (lines.at(-1).length > 0) {
-               lines.push([]);
+            const lastLine = lines.at(-1);
+            if (element !== null) {
+               if (element.innerText === symbol) {
+                  lastLine.push(element);
+               }
+               else if (lastLine.length > 0) {
+                  lines.push([]);
+               }
             }
          }
       }
