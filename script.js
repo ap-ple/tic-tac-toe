@@ -36,22 +36,22 @@ const mainGameboard = (function(rootElement, boardSize) {
       let diagonalReverse = [];
 
       for (let i = 0; i < boardSize; i++) {
-         const columnIndex = x + i * boardSize;
-         const rowIndex = i + y * boardSize;
-         const diagonalIndex = i + i * boardSize;
-         const diagonalReverseIndex = i + (boardSize - i - 1) * boardSize;
+         const columnElement = board[x + i * boardSize];
+         const rowElement = board[i + y * boardSize];
+         const diagonalElement = board[i + i * boardSize];
+         const diagonalReverseElement = board[i + (boardSize - i - 1) * boardSize];
 
-         if (symbol === board[columnIndex].innerText) {
-            column.push(columnIndex);
+         if (symbol === columnElement.innerText) {
+            column.push(columnElement);
          }
-         if (symbol === board[rowIndex].innerText) {
-            row.push(rowIndex);
+         if (symbol === rowElement.innerText) {
+            row.push(rowElement);
          }
-         if (symbol === board[diagonalIndex].innerText) {
-            diagonal.push(diagonalIndex);
+         if (symbol === diagonalElement.innerText) {
+            diagonal.push(diagonalElement);
          }
-         if (symbol === board[diagonalReverseIndex].innerText) {
-            diagonalReverse.push(diagonalReverseIndex);
+         if (symbol === diagonalReverseElement.innerText) {
+            diagonalReverse.push(diagonalReverseElement);
          }
       }
       
@@ -62,8 +62,8 @@ const mainGameboard = (function(rootElement, boardSize) {
       lines.forEach(line => {
          if (line.length === boardSize) {
             winningLineFound = true;
-            line.forEach(index => {
-               board[index].classList.add("winning")
+            line.forEach(element => {
+               element.classList.add("winning")
             });
          }
       });
