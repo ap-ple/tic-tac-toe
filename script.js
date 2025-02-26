@@ -29,17 +29,45 @@ const mainGameboard = (function(rootElement, boardSize) {
       const x = Math.floor(spaceIndex % boardSize);
       const y = Math.floor(spaceIndex / boardSize);
 
-      let column = row = diagonal = diagonalReverse = 0;
+      let column = [];
+      let row = [];
+      let diagonal = [];
+      let diagonalReverse = [];
 
       for (let i = 0; i < boardSize; i++) {
-         if (symbol === board[x + i * boardSize].innerText) column++;
-         if (symbol === board[i + y * boardSize].innerText) row++;
-         if (symbol === board[i + i * boardSize].innerText) diagonal++;
-         if (symbol === board[i + (boardSize - i - 1) * boardSize].innerText) diagonalReverse++;
-      }
+         const columnIndex = x + i * boardSize;
+         const rowIndex = i + y * boardSize;
+         const diagonalIndex = i + i * boardSize;
+         const diagonalReverseIndex = i + (boardSize - i - 1) * boardSize;
 
-      // TODO: change background of winning elements
-      return [column, row, diagonal, diagonalReverse].indexOf(boardSize) > -1;
+         if (symbol === board[columnIndex].innerText) {
+            column.push(columnIndex);
+         }
+         if (symbol === board[rowIndex].innerText) {
+            row.push(rowIndex);
+         }
+         if (symbol === board[diagonalIndex].innerText) {
+            diagonal.push(diagonalIndex);
+         }
+         if (symbol === board[diagonalReverseIndex].innerText) {
+            diagonalReverse.push(diagonalReverseIndex);
+         }
+      }
+      
+      const lines = [column, row, diagonal, diagonalReverse];
+
+      let winningLineFound = false;
+
+      lines.forEach(line => {
+         if (line.length === boardSize) {
+            winningLineFound = true;
+            line.forEach(index => {
+               board[index].classList.add("winning")
+            });
+         }
+      });
+
+      return winningLineFound;
    }
 
    const disableBoard = () => board.map(spaceElement => {
@@ -49,6 +77,7 @@ const mainGameboard = (function(rootElement, boardSize) {
    const resetBoard = () => board.map(spaceElement => {
       spaceElement.disabled = false;
       spaceElement.innerText = ""
+      spaceElement.classList.remove("winning");
    });
 
    return {board, boardSize, win, disableBoard, resetBoard};

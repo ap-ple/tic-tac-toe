@@ -40,6 +40,10 @@ body>main>.gameboard>button {
    background: white;
 }
 
+body>main>.gameboard>button.winning {
+   background: rgb(255, 150, 150);
+}
+
 body>main>.gameboard>button:focus-visible {
    outline: dashed white;
 }
