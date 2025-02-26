@@ -12,11 +12,10 @@ SYMBOLS.forEach(symbol => {
 });
 
 const mainGameboard = (function(rootElement, boardSize) {
-   const board = Array(boardSize ** 2);
-   
    const boardElement = rootElement.querySelector("body>main>.gameboard");
-
    boardElement.style.setProperty("--board-size", boardSize);
+   
+   const board = Array(boardSize ** 2);
    
    for (let i = 0; i < board.length; i++) {
       const spaceElement = rootElement.createElement("button");
