@@ -19,6 +19,7 @@ const mainGameboard = (function(rootElement, boardSize) {
    
    for (let i = 0; i < board.length; i++) {
       const spaceElement = rootElement.createElement("button");
+      spaceElement.classList.add();
       board[i] = spaceElement;
       boardElement.appendChild(spaceElement);
    }
