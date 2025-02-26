@@ -38,6 +38,7 @@ const mainGameboard = (function(rootElement, boardSize) {
          if (symbol === board[i + (boardSize - i - 1) * boardSize].innerText) diagonalReverse++;
       }
 
+      // TODO: change background of winning elements
       return [column, row, diagonal, diagonalReverse].indexOf(boardSize) > -1;
    }
 
