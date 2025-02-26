@@ -36,6 +36,7 @@ const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
       const spaceIndex = board.indexOf(spaceElement);
       const x = Math.floor(spaceIndex % boardSize);
       const y = Math.floor(spaceIndex / boardSize);
+      const reverseY = boardSize - 1 - y;
 
       let columnLines = [[]];
       let rowLines = [[]];
@@ -47,19 +48,47 @@ const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
       for (let i = 0; i < boardSize; i++) {
          const columnElement = board[x + i * boardSize];
          const rowElement = board[i + y * boardSize];
-         const diagonalElement = board[i + i * boardSize];
-         const diagonalReverseElement = board[i + (boardSize - i - 1) * boardSize];
-
-         const elements = [columnElement, rowElement, diagonalElement, diagonalReverseElement];
-
+         let diagonalElement = null;
+         let diagonalReverseElement = null;
+         
+         let diagonalX = i;
+         if (y > x) {
+            diagonalX -= y - x;
+         }
+         
+         let diagonalY = i;
+         if (x > y) {
+            diagonalY -= x - y;
+         }
+         
+         if (diagonalX >= 0 && diagonalY >= 0) {
+            diagonalElement = board[diagonalX + diagonalY * boardSize];
+         }
+         
+         let diagonalReverseX = i;
+         if (reverseY > x) {
+            diagonalReverseX -= reverseY - x;
+         }
+         
+         let diagonalReverseY = boardSize - 1 - i;
+         if (x > reverseY) {
+            diagonalReverseY += x - reverseY;
+         }
+         
+         if (diagonalReverseX >= 0 && diagonalReverseY <= boardSize - 1) {
+            diagonalReverseElement = board[diagonalReverseX + diagonalReverseY * boardSize];
+         }
+         
+         let elements = [columnElement, rowElement, diagonalElement, diagonalReverseElement];
+         
          for (let j = 0; j < elements.length; j++) {
             const element = elements[j];
-            const line = lines[j];
-            if (element.innerText === symbol) {
-               line.at(-1).push(element);
+            const lineArray = lines[j];
+            if (element !== null && element.innerText === symbol) {
+               lineArray.at(-1).push(element);
             }
-            else {
-               line.push([]);
+            else if (lineArray.at(-1).length > 0) {
+               lineArray.push([]);
             }
          }
       }
