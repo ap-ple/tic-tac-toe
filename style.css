@@ -4,7 +4,7 @@
    margin: 0;
 }
 
-button:hover {
+button {
    cursor: pointer;
 }
 
@@ -43,6 +43,7 @@ body>main>.gameboard>button {
 body>main>.gameboard>button:focus-visible::after,
 body>main>.gameboard>button:hover::after {
    content: attr(data-next-symbol);
+   color: gray;
 }
 
 body>main>.gameboard>button:focus-visible {
@@ -54,18 +55,17 @@ body>main>.gameboard>button:hover {
 }
 
 body>main>.gameboard>button:disabled {
-   cursor: inherit;
-   color: inherit;
-   opacity: inherit;
+   cursor: initial;
+   color: initial;
+   opacity: initial;
+}
+
+body>main>.gameboard>button.winning {
+   color: red;
 }
 
 body>main>.gameboard>button:disabled::after {
    content: "";
-}
-
-body>main>.gameboard>button.winning,
-body>main>.gameboard>button.winning:disabled {
-   color: red;
 }
 
 body>main>button.reset {
