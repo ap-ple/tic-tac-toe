@@ -40,11 +40,6 @@ body>main>.gameboard>button {
    background: white;
 }
 
-body>main>.gameboard>button.winning,
-body>main>.gameboard>button.winning:disabled {
-   color: red;
-}
-
 body>main>.gameboard>button:focus-visible {
    outline: dashed white;
 }
@@ -57,6 +52,11 @@ body>main>.gameboard>button:disabled {
    cursor: inherit;
    color: inherit;
    opacity: inherit;
+}
+
+body>main>.gameboard>button.winning,
+body>main>.gameboard>button.winning:disabled {
+   color: red;
 }
 
 body>main>button.reset {
