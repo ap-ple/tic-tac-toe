@@ -43,7 +43,7 @@ const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
       let diagonalLines = [[]];
       let diagonalReverseLines = [[]];
       
-      const lines = [columnLines, rowLines, diagonalLines, diagonalReverseLines];
+      const linesArray = [columnLines, rowLines, diagonalLines, diagonalReverseLines];
 
       for (let i = 0; i < boardSize; i++) {
          const columnElement = board[x + i * boardSize];
@@ -83,19 +83,19 @@ const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
          
          for (let j = 0; j < elements.length; j++) {
             const element = elements[j];
-            const lineElements = lines[j];
+            const lines = linesArray[j];
             if (element !== null && element.innerText === symbol) {
-               lineElements.at(-1).push(element);
+               lines.at(-1).push(element);
             }
-            else if (lineElements.at(-1).length > 0) {
-               lineElements.push([]);
+            else if (lines.at(-1).length > 0) {
+               lines.push([]);
             }
          }
       }
       
       let winningLineFound = false;
 
-      lines.forEach(lineElements => {
+      linesArray.forEach(lineElements => {
          lineElements
          .filter(line => line.length >= winningLineLength)
          .forEach(line => {
