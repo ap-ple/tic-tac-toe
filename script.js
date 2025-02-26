@@ -25,6 +25,8 @@ const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
       boardElement.appendChild(spaceElement);
    }
 
+   const spaceAtCoordinate = (x, y) => board[x + y * boardSize];
+
    const setNextSymbol = (symbol) => {
       board.forEach(spaceElement => {
          spaceElement.setAttribute("data-next-symbol", symbol);
@@ -32,11 +34,19 @@ const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
    }
 
    const win = (spaceElement) => {
+      const maxCoordinate = boardSize - 1;
+
       const symbol = spaceElement.innerText;
       const spaceIndex = board.indexOf(spaceElement);
       const x = Math.floor(spaceIndex % boardSize);
       const y = Math.floor(spaceIndex / boardSize);
-      const reverseY = boardSize - 1 - y;
+
+      const diagonalXOffset = Math.max(0, y - x);
+      const diagonalYOffset = Math.max(0, x - y);
+
+      const reverseY = maxCoordinate - y;
+      const diagonalReverseXOffset = Math.max(0, reverseY - x);
+      const diagonalReverseYOffset = Math.max(0, x - reverseY);
 
       let columnLines = [[]];
       let rowLines = [[]];
@@ -46,37 +56,23 @@ const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
       const linesArray = [columnLines, rowLines, diagonalLines, diagonalReverseLines];
 
       for (let i = 0; i < boardSize; i++) {
-         const columnElement = board[x + i * boardSize];
-         const rowElement = board[i + y * boardSize];
+         const columnElement = spaceAtCoordinate(x, i);
+         const rowElement = spaceAtCoordinate(i, y);
          let diagonalElement = null;
          let diagonalReverseElement = null;
          
-         let diagonalX = i;
-         if (y > x) {
-            diagonalX -= y - x;
-         }
-         
-         let diagonalY = i;
-         if (x > y) {
-            diagonalY -= x - y;
-         }
+         let diagonalX = i - diagonalXOffset;
+         let diagonalY = i - diagonalYOffset;
          
          if (diagonalX >= 0 && diagonalY >= 0) {
-            diagonalElement = board[diagonalX + diagonalY * boardSize];
+            diagonalElement = spaceAtCoordinate(diagonalX, diagonalY);
          }
          
-         let diagonalReverseX = i;
-         if (reverseY > x) {
-            diagonalReverseX -= reverseY - x;
-         }
+         let diagonalReverseX = i - diagonalReverseXOffset;         
+         let diagonalReverseY = maxCoordinate - i + diagonalReverseYOffset;
          
-         let diagonalReverseY = boardSize - 1 - i;
-         if (x > reverseY) {
-            diagonalReverseY += x - reverseY;
-         }
-         
-         if (diagonalReverseX >= 0 && diagonalReverseY <= boardSize - 1) {
-            diagonalReverseElement = board[diagonalReverseX + diagonalReverseY * boardSize];
+         if (diagonalReverseX >= 0 && diagonalReverseY <= maxCoordinate) {
+            diagonalReverseElement = spaceAtCoordinate(diagonalReverseX, diagonalReverseY);
          }
          
          let elements = [columnElement, rowElement, diagonalElement, diagonalReverseElement];
