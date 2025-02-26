@@ -14,7 +14,7 @@ SYMBOLS.forEach(symbol => {
 const mainGameboard = (function(rootElement, boardSize) {
    const boardElement = rootElement.querySelector("body>main>.gameboard");
    boardElement.style.setProperty("--board-size", boardSize);
-   
+
    const board = Array(boardSize ** 2);
    
    for (let i = 0; i < board.length; i++) {
@@ -81,7 +81,7 @@ const mainGameboard = (function(rootElement, boardSize) {
       spaceElement.classList.remove("winning");
    });
 
-   return {board, boardSize, win, disableBoard, resetBoard};
+   return {board, win, disableBoard, resetBoard};
 })(document, BOARD_SIZE);
 
 const mainGame = (function(rootElement, gameboard, players) {
@@ -105,7 +105,7 @@ const mainGame = (function(rootElement, gameboard, players) {
          messageElement.innerText = `${playerThisTurn().name} wins!`;
          gameboard.disableBoard();
       }
-      else if (++turn >= gameboard.boardSize ** 2) {
+      else if (++turn >= gameboard.board.length) {
          messageElement.innerText = "Tie!";
       }
       else {
