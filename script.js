@@ -1,4 +1,3 @@
-
 const Player = function(name, symbol) {
    return {name, symbol};
 }
