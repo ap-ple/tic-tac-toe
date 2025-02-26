@@ -96,7 +96,9 @@ const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
       let winningLineFound = false;
 
       lines.forEach(lineArray => {
-         lineArray.filter(line => line.length >= winningLineLength).forEach(line => {
+         lineArray
+         .filter(line => line.length >= winningLineLength)
+         .forEach(line => {
             winningLineFound = true;
             line.forEach(element => {
                element.classList.add("winning")
@@ -107,11 +109,11 @@ const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
       return winningLineFound;
    }
 
-   const disableBoard = () => board.map(spaceElement => {
+   const disableBoard = () => board.forEach(spaceElement => {
       spaceElement.disabled = true;
    });
 
-   const resetBoard = () => board.map(spaceElement => {
+   const resetBoard = () => board.forEach(spaceElement => {
       spaceElement.disabled = false;
       spaceElement.innerText = ""
       spaceElement.classList.remove("winning");
