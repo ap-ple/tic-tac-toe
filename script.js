@@ -83,20 +83,20 @@ const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
          
          for (let j = 0; j < elements.length; j++) {
             const element = elements[j];
-            const lineArray = lines[j];
+            const lineElements = lines[j];
             if (element !== null && element.innerText === symbol) {
-               lineArray.at(-1).push(element);
+               lineElements.at(-1).push(element);
             }
-            else if (lineArray.at(-1).length > 0) {
-               lineArray.push([]);
+            else if (lineElements.at(-1).length > 0) {
+               lineElements.push([]);
             }
          }
       }
       
       let winningLineFound = false;
 
-      lines.forEach(lineArray => {
-         lineArray
+      lines.forEach(lineElements => {
+         lineElements
          .filter(line => line.length >= winningLineLength)
          .forEach(line => {
             winningLineFound = true;
