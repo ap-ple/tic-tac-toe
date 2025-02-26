@@ -26,7 +26,6 @@ body>main {
 }
 
 body>main>.gameboard {
-   --board-size: 3;
    display: grid;
    grid-template: repeat(var(--board-size), 1fr) / repeat(var(--board-size), 1fr);
    background: black;
