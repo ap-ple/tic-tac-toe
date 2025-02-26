@@ -40,6 +40,11 @@ body>main>.gameboard>button {
    background: white;
 }
 
+body>main>.gameboard>button:focus-visible::after,
+body>main>.gameboard>button:hover::after {
+   content: attr(data-next-symbol);
+}
+
 body>main>.gameboard>button:focus-visible {
    outline: dashed white;
 }
@@ -52,6 +57,10 @@ body>main>.gameboard>button:disabled {
    cursor: inherit;
    color: inherit;
    opacity: inherit;
+}
+
+body>main>.gameboard>button:disabled::after {
+   content: "";
 }
 
 body>main>.gameboard>button.winning,

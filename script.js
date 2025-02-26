@@ -24,6 +24,12 @@ const mainGameboard = (function(rootElement, boardSize) {
       boardElement.appendChild(spaceElement);
    }
 
+   const setNextSymbol = (symbol) => {
+      board.forEach(spaceElement => {
+         spaceElement.setAttribute("data-next-symbol", symbol);
+      });
+   }
+
    const win = (spaceElement) => {
       const symbol = spaceElement.innerText;
       const spaceIndex = board.indexOf(spaceElement);
@@ -81,7 +87,7 @@ const mainGameboard = (function(rootElement, boardSize) {
       spaceElement.classList.remove("winning");
    });
 
-   return {board, win, disableBoard, resetBoard};
+   return {board, setNextSymbol, win, disableBoard, resetBoard};
 })(document, BOARD_SIZE);
 
 const mainGame = (function(rootElement, gameboard, players) {
@@ -95,6 +101,7 @@ const mainGame = (function(rootElement, gameboard, players) {
       turn = 0;
       messageElement.innerText = `Your turn, ${playerThisTurn().name}.`;
       gameboard.resetBoard();
+      gameboard.setNextSymbol(playerThisTurn().symbol);
    }
 
    const play = (spaceElement) => {
@@ -111,6 +118,8 @@ const mainGame = (function(rootElement, gameboard, players) {
       else {
          messageElement.innerText = `Your turn, ${playerThisTurn().name}.`;
       }
+
+      gameboard.setNextSymbol(playerThisTurn().symbol);
    }
 
    gameboard.board.forEach(spaceElement => {
