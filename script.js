@@ -3,6 +3,7 @@ const Player = function(name, symbol) {
 }
 
 const BOARD_SIZE = 3;
+const WINNING_LINE_LENGTH = 3;
 
 const SYMBOLS = ["X", "O"];
 const PLAYERS = [];
@@ -11,7 +12,7 @@ SYMBOLS.forEach(symbol => {
    PLAYERS.push(new Player(`Player ${symbol}`, symbol));
 });
 
-const mainGameboard = (function(rootElement, boardSize) {
+const mainGameboard = (function(rootElement, boardSize, winningLineLength) {
    const boardElement = rootElement.querySelector("body>main>.gameboard");
    boardElement.style.setProperty("--board-size", boardSize);
 
@@ -36,10 +37,12 @@ const mainGameboard = (function(rootElement, boardSize) {
       const x = Math.floor(spaceIndex % boardSize);
       const y = Math.floor(spaceIndex / boardSize);
 
-      let column = [];
-      let row = [];
-      let diagonal = [];
-      let diagonalReverse = [];
+      let columnLines = [[]];
+      let rowLines = [[]];
+      let diagonalLines = [[]];
+      let diagonalReverseLines = [[]];
+      
+      const lines = [columnLines, rowLines, diagonalLines, diagonalReverseLines];
 
       for (let i = 0; i < boardSize; i++) {
          const columnElement = board[x + i * boardSize];
@@ -47,31 +50,29 @@ const mainGameboard = (function(rootElement, boardSize) {
          const diagonalElement = board[i + i * boardSize];
          const diagonalReverseElement = board[i + (boardSize - i - 1) * boardSize];
 
-         if (symbol === columnElement.innerText) {
-            column.push(columnElement);
-         }
-         if (symbol === rowElement.innerText) {
-            row.push(rowElement);
-         }
-         if (symbol === diagonalElement.innerText) {
-            diagonal.push(diagonalElement);
-         }
-         if (symbol === diagonalReverseElement.innerText) {
-            diagonalReverse.push(diagonalReverseElement);
+         const elements = [columnElement, rowElement, diagonalElement, diagonalReverseElement];
+
+         for (let j = 0; j < elements.length; j++) {
+            const element = elements[j];
+            const line = lines[j];
+            if (element.innerText === symbol) {
+               line.at(-1).push(element);
+            }
+            else {
+               line.push([]);
+            }
          }
       }
       
-      const lines = [column, row, diagonal, diagonalReverse];
-
       let winningLineFound = false;
 
-      lines.forEach(line => {
-         if (line.length === boardSize) {
+      lines.forEach(lineArray => {
+         lineArray.filter(line => line.length >= winningLineLength).forEach(line => {
             winningLineFound = true;
             line.forEach(element => {
                element.classList.add("winning")
             });
-         }
+         });
       });
 
       return winningLineFound;
@@ -88,7 +89,7 @@ const mainGameboard = (function(rootElement, boardSize) {
    });
 
    return {board, setNextSymbol, win, disableBoard, resetBoard};
-})(document, BOARD_SIZE);
+})(document, BOARD_SIZE, WINNING_LINE_LENGTH);
 
 const mainGame = (function(rootElement, gameboard, players) {
    let turn = 0;
