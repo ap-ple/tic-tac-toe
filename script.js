@@ -2,7 +2,7 @@ const SYMBOLS = ["X", "O"];
 const BOARD_SIZE = 3;
 const MINIMUM_BOARD_SIZE = 3;
 const WINNING_LINE_LENGTH = 3;
-const MINIMUM_WINNING_LINE_LENGTH = 2;
+const MINIMUM_WINNING_LINE_LENGTH = 3;
 
 const Player = function(name, symbol) {
    return {name, symbol};
