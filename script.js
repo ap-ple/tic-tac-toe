@@ -208,10 +208,10 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
          const key = pair[0];
          const value = pair[1];
 
-         if (key.match(/player-\d-name/)) {
+         if (key.match(/^player-\d-name$/)) {
             playerName = value;
          }
-         if (key.match(/player-\d-symbol/)) {
+         if (key.match(/^player-\d-symbol$/)) {
             players.push(new Player(playerName, value));
             if (symbols.indexOf(value) > -1) {
                messageWarning("Symbols must be unique");
