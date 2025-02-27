@@ -82,7 +82,7 @@ const Gameboard = function(rootElement, parentElement, boardSize, winningLineLen
             const lines = linesArray[j];
             const lastLine = lines.at(-1);
             if (element !== null) {
-               if (element.innerText === symbol) {
+               if (element.innerText.match(symbol)) {
                   lastLine.push(element);
                }
                else if (lastLine.length > 0) {
