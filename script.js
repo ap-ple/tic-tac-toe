@@ -221,10 +221,10 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
             playerName = null;
          }
          if (key.match("board-size")) {
-            boardSize = value;
+            boardSize = Number(value);
          }
          if (key.match("winning-line-length")) {
-            winningLineLength = value;
+            winningLineLength = Number(value);
          }
       }
 
