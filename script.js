@@ -178,6 +178,20 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
    const formElement = rootElement.createElement("form");
    parentElement.appendChild(formElement);
 
+   const messageElement = parentElement.querySelector(".message");
+
+   const messageWarning = (warning) => {
+      messageElement.innerText = warning;
+      messageElement.classList.add("warning");
+   }
+
+   const clearWarning = () => {
+      messageElement.innerText = "";
+      messageElement.classList.remove("warning");  
+   }
+
+   formElement.addEventListener("input", event => clearWarning());
+
    formElement.addEventListener("submit", event => {
       event.preventDefault();
 
@@ -185,8 +199,6 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
       let players = [];
       let boardSize = defaultBoardSize;
       let winningLineLength = defaultWinningLineLength;
-
-      const messageElement = parentElement.querySelector(".message");
       
       const formData = new FormData(event.target);
 
@@ -202,7 +214,7 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
          if (key.match(/player-\d-symbol/)) {
             players.push(new Player(playerName, value));
             if (symbols.indexOf(value) > -1) {
-               messageElement.innerText = "Symbols must be unique"
+               messageWarning("Symbols must be unique");
                return;
             }
             symbols.push(value);
@@ -215,7 +227,13 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
             winningLineLength = value;
          }
       }
+
+      if (winningLineLength > boardSize) {
+         messageWarning("Winning line length must be lower than board size")
+         return;
+      }
       
+      clearWarning();
       parentElement.removeChild(formElement);
       
       const mainGameboard = new Gameboard(rootElement, parentElement, boardSize, winningLineLength);
@@ -355,9 +373,4 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
    formElement.appendChild(startElement);
 
    startElement.innerText = "Start Game";
-
-   const messageElement = rootElement.createElement("div");
-   parentElement.appendChild(messageElement);
-
-   messageElement.classList.add("message");
 })(document, main, SYMBOLS, BOARD_SIZE, MINIMUM_BOARD_SIZE, WINNING_LINE_LENGTH, MINIMUM_WINNING_LINE_LENGTH);

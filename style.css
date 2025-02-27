@@ -144,3 +144,7 @@ body>main>button.reset {
 body>main>.message {
    font-size: 0.75rem;
 }
+
+body>main>.message.warning {
+   color: red;
+}
