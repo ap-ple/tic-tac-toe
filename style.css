@@ -35,6 +35,14 @@ body>main {
    gap: 2rem;
 }
 
+body>main>.message {
+   font-size: 0.75rem;
+}
+
+body>main>.message.warning {
+   color: red;
+}
+
 body>main>form {
    display: flex;
    flex-flow: column;
@@ -139,12 +147,4 @@ body>main>.gameboard>button:disabled::after {
 
 body>main>button.reset {
    padding: 0.5rem;
-}
-
-body>main>.message {
-   font-size: 0.75rem;
-}
-
-body>main>.message.warning {
-   color: red;
 }
