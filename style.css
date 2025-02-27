@@ -7,7 +7,7 @@
 .field:has(:required)>label::after {
    content: "*";
    color: red;
-   padding: 0.25rem;
+   padding: 0 0.25rem;
 }
 
 button {
@@ -58,12 +58,10 @@ body>main>form .field {
    gap: 0.5rem;
 }
 
-body>main>form input {
-   padding: 0.5rem;
-}
-
+body>main>form input,
 body>main>form button {
-   padding: 0.5rem;
+   --offset: 0.5rem;
+   padding: var(--offset);
 }
 
 body>main>form label {
@@ -83,7 +81,7 @@ body>main>form>.players>fieldset {
 }
 
 body>main>form>.players>fieldset>.field>input[name$=symbol] {
-   width: 3rem;
+   width: 2rem;
    text-align: center;
 }
 
@@ -93,17 +91,21 @@ body>main>form>.player-add-remove {
 }
 
 body>main>form>.player-add-remove>button {
-   flex: auto;
+   flex: 1;
 }
 
 body>main>form>.settings {
    display: flex;
-   justify-content: space-between;
-   gap: 0.5rem;
+   gap: 1rem;
+}
+
+body>main>form>.settings>.field {
+   flex: 1;
+   min-width: 0;
 }
 
 body>main>form>.settings>.field>input {
-   width: 4rem;
+   width: calc(100% - --offset * 2);
 }
 
 body>main>.gameboard {
