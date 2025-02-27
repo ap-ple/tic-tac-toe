@@ -229,7 +229,7 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
       }
 
       if (winningLineLength > boardSize) {
-         messageWarning("Winning line length must be lower than board size")
+         messageWarning("Winning line length cannot be greater than board size")
          return;
       }
       
