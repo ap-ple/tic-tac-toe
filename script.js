@@ -257,23 +257,48 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
       playerElement.appendChild(legend);
       
       legend.innerText = `Player ${++playerNumber}`
-      legend.ariaRequired = true;
+
+      const nameField = rootElement.createElement("div");
+      playerElement.appendChild(nameField);
+
+      nameField.classList.add("field");
+
+      const nameID = `player-${playerNumber}-name`;
+
+      const nameLabel = rootElement.createElement("label");
+      nameField.appendChild(nameLabel);
+
+      nameLabel.innerText = "Name";
+      nameLabel.htmlFor = nameID;
       
       const nameInput = rootElement.createElement("input");
-      playerElement.appendChild(nameInput);
-      
-      const symbolInput = rootElement.createElement("input");
-      playerElement.appendChild(symbolInput);
+      nameField.appendChild(nameInput);
       
       nameInput.type = "text";
-      nameInput.name = `player-${playerNumber}-name`;
-      nameInput.placeholder = "Name";
+      nameInput.id = nameID;
+      nameInput.name = nameID;
       nameInput.required = true;
       nameInput.addEventListener("focus", event => event.target.select());
       
+      const symbolField = rootElement.createElement("div");
+      playerElement.appendChild(symbolField);
+
+      symbolField.classList.add("field");
+
+      const symbolID = `player-${playerNumber}-symbol`;
+
+      const symbolLabel = rootElement.createElement("label");
+      symbolField.appendChild(symbolLabel);
+
+      symbolLabel.innerText = "Symbol";
+      symbolLabel.htmlFor = nameID;
+
+      const symbolInput = rootElement.createElement("input");
+      symbolField.appendChild(symbolInput);
+
       symbolInput.type = "text";
-      symbolInput.name = `player-${playerNumber}-symbol`;
-      symbolInput.placeholder = "Symbol";
+      symbolInput.id = symbolID;
+      symbolInput.name = symbolID;
       symbolInput.maxLength = 1;
       symbolInput.required = true;
       symbolInput.addEventListener("focus", event => event.target.select());
@@ -327,18 +352,19 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
 
    settings.classList.add("settings");
 
-   const boardSizeElement = rootElement.createElement("div");
-   settings.appendChild(boardSizeElement);
+   const boardSizeField = rootElement.createElement("div");
+   settings.appendChild(boardSizeField);
+
+   boardSizeField.classList.add("field");
 
    const boardSizeLabel = rootElement.createElement("label");
-   boardSizeElement.appendChild(boardSizeLabel);
+   boardSizeField.appendChild(boardSizeLabel);
 
    boardSizeLabel.htmlFor = "board-size";
    boardSizeLabel.innerText = "Board Size";
-   boardSizeLabel.ariaRequired = true;
 
    const boardSizeInput = rootElement.createElement("input");
-   boardSizeElement.appendChild(boardSizeInput);
+   boardSizeField.appendChild(boardSizeInput);
 
    boardSizeInput.type = "number";
    boardSizeInput.name = "board-size";
@@ -348,18 +374,19 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
    boardSizeInput.required = true;
    boardSizeInput.addEventListener("focus", event => event.target.select());
 
-   const winningLineLengthElement = rootElement.createElement("div");
-   settings.appendChild(winningLineLengthElement);
+   const winningLineLengthField = rootElement.createElement("div");
+   settings.appendChild(winningLineLengthField);
+
+   winningLineLengthField.classList.add("field");
 
    const winningLineLengthLabel = rootElement.createElement("label");
-   winningLineLengthElement.appendChild(winningLineLengthLabel);
+   winningLineLengthField.appendChild(winningLineLengthLabel);
 
    winningLineLengthLabel.htmlFor = "winning-line-length";
    winningLineLengthLabel.innerText = "Winning Line Length";
-   winningLineLengthLabel.ariaRequired = true;
 
    const winningLineLengthInput = rootElement.createElement("input");
-   winningLineLengthElement.appendChild(winningLineLengthInput);
+   winningLineLengthField.appendChild(winningLineLengthInput);
 
    winningLineLengthInput.type = "number";
    winningLineLengthInput.name = "winning-line-length";

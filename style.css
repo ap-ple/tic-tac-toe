@@ -4,7 +4,7 @@
    margin: 0;
 }
 
-[aria-required=true]::after {
+.field:has(:required)>label::after {
    content: "*";
    color: red;
    padding: 0.25rem;
@@ -49,6 +49,12 @@ body>main>form {
    gap: 1rem;
 }
 
+body>main>form .field {
+   display: flex;
+   flex-flow: column;
+   gap: 0.5rem;
+}
+
 body>main>form input {
    padding: 0.5rem;
 }
@@ -73,7 +79,7 @@ body>main>form>.players>fieldset {
    padding: 1rem;
 }
 
-body>main>form>.players>fieldset>input[name$=symbol] {
+body>main>form>.players>fieldset>.field>input[name$=symbol] {
    width: 3rem;
    text-align: center;
 }
@@ -93,13 +99,7 @@ body>main>form>.settings {
    gap: 0.5rem;
 }
 
-body>main>form>.settings>div {
-   display: flex;
-   flex-flow: column;
-   gap: 0.5rem;
-}
-
-body>main>form>.settings>div>input {
+body>main>form>.settings>.field>input {
    width: 4rem;
 }
 
