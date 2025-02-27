@@ -187,9 +187,11 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
    }
 
    const clearWarning = () => {
-      messageElement.innerText = "";
-      messageElement.classList.remove("warning");  
+      messageElement.innerText = "Click Start Game to play!";
+      messageElement.classList.remove("warning");
    }
+
+   clearWarning();
 
    formElement.addEventListener("input", event => clearWarning());
 
