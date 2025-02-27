@@ -37,6 +37,7 @@ body>main {
 
 body>main>.message {
    font-size: 0.75rem;
+   height: 1rem;
 }
 
 body>main>.message.warning {
