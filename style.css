@@ -73,7 +73,7 @@ body>main>form>.players>fieldset {
    padding: 1rem;
 }
 
-body>main>form>.players>fieldset>input[placeholder=Symbol] {
+body>main>form>.players>fieldset>input[name$=symbol] {
    width: 3rem;
    text-align: center;
 }
