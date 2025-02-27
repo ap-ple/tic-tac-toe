@@ -184,6 +184,7 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
    const messageWarning = (warning) => {
       messageElement.innerText = warning;
       messageElement.classList.add("warning");
+      window.scrollTo(0, 0);
    }
 
    const clearWarning = () => {
