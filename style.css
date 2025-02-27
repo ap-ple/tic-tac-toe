@@ -19,9 +19,11 @@ button:disabled {
 }
 
 body {
+   --offset: 4rem;
    display: flex;
    flex-flow: column;
-   height: 100vh;
+   min-height: calc(100vh - var(--offset) * 2);
+   padding: var(--offset);
    align-items: center;
    justify-content: center;
    gap: 2rem;
