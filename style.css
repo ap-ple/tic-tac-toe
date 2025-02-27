@@ -4,8 +4,18 @@
    margin: 0;
 }
 
+[aria-required=true]::after {
+   content: "*";
+   color: red;
+   padding: 0.25rem;
+}
+
 button {
    cursor: pointer;
+}
+
+button:disabled {
+   cursor: initial;
 }
 
 body {
@@ -23,6 +33,66 @@ body>main {
    align-items: center;
    justify-content: center;
    gap: 2rem;
+}
+
+body>main>form {
+   display: flex;
+   flex-flow: column;
+   gap: 1rem;
+}
+
+body>main>form input {
+   padding: 0.5rem;
+}
+
+body>main>form button {
+   padding: 0.5rem;
+}
+
+body>main>form label {
+   font-size: 0.75rem;
+}
+
+body>main>form>.players {
+   display: flex;
+   flex-flow: column;
+   gap: 1rem;
+}
+
+body>main>form>.players>fieldset {
+   display: flex;
+   gap: 1rem;
+   padding: 1rem;
+}
+
+body>main>form>.players>fieldset>input[placeholder=Symbol] {
+   width: 3rem;
+   text-align: center;
+}
+
+body>main>form>.player-add-remove {
+   display: flex;
+   gap: 1rem;
+}
+
+body>main>form>.player-add-remove>button {
+   flex: auto;
+}
+
+body>main>form>.settings {
+   display: flex;
+   justify-content: space-between;
+   gap: 0.5rem;
+}
+
+body>main>form>.settings>div {
+   display: flex;
+   flex-flow: column;
+   gap: 0.5rem;
+}
+
+body>main>form>.settings>div>input {
+   width: 4rem;
 }
 
 body>main>.gameboard {
@@ -55,7 +125,6 @@ body>main>.gameboard>button:hover {
 }
 
 body>main>.gameboard>button:disabled {
-   cursor: initial;
    color: initial;
    opacity: initial;
 }
@@ -70,4 +139,8 @@ body>main>.gameboard>button:disabled::after {
 
 body>main>button.reset {
    padding: 0.5rem;
+}
+
+body>main>.message {
+   font-size: 0.75rem;
 }
