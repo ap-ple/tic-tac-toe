@@ -1,6 +1,7 @@
 const SYMBOLS = ["X", "O"];
 const BOARD_SIZE = 3;
 const MINIMUM_BOARD_SIZE = 3;
+const MAXIMUM_BOARD_SIZE = 25;
 const WINNING_LINE_LENGTH = 3;
 const MINIMUM_WINNING_LINE_LENGTH = 3;
 
@@ -174,7 +175,7 @@ const Game = function(rootElement, parentElement, gameboard, players) {
 
 const main = document.body.querySelector("main");
 
-const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBoardSize, minimumBoardSize, defaultWinningLineLength, minimumWinningLineLength) {
+const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBoardSize, minimumBoardSize, maximumBoardSize, defaultWinningLineLength, minimumWinningLineLength) {
    const formElement = rootElement.createElement("form");
    parentElement.appendChild(formElement);
 
@@ -370,6 +371,7 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
    boardSizeInput.name = "board-size";
    boardSizeInput.id = "board-size";
    boardSizeInput.min = minimumBoardSize;
+   boardSizeInput.max = maximumBoardSize;
    boardSizeInput.value = defaultBoardSize;
    boardSizeInput.required = true;
    boardSizeInput.addEventListener("focus", event => event.target.select());
@@ -400,4 +402,4 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
    formElement.appendChild(startElement);
 
    startElement.innerText = "Start Game";
-})(document, main, SYMBOLS, BOARD_SIZE, MINIMUM_BOARD_SIZE, WINNING_LINE_LENGTH, MINIMUM_WINNING_LINE_LENGTH);
+})(document, main, SYMBOLS, BOARD_SIZE, MINIMUM_BOARD_SIZE, MAXIMUM_BOARD_SIZE, WINNING_LINE_LENGTH, MINIMUM_WINNING_LINE_LENGTH);
