@@ -216,12 +216,13 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
             playerName = value;
          }
          if (key.match(/^player-\d-symbol$/)) {
-            players.push(new Player(playerName, value));
             if (symbols.indexOf(value) > -1) {
                messageWarning("Symbols must be unique");
                return;
             }
             symbols.push(value);
+            
+            players.push(new Player(playerName, value));
             playerName = null;
          }
          if (key.match("board-size")) {
