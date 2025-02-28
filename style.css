@@ -5,7 +5,7 @@ body * {
 }
 
 body {
-   --offset: 4rem;
+   --offset: 2rem;
    display: flex;
    flex-flow: column;
    min-height: calc(100vh - var(--offset) * 2);
