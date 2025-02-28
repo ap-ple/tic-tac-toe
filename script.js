@@ -1,7 +1,7 @@
 const SYMBOLS = ["X", "O"];
 const BOARD_SIZE = 3;
 const MINIMUM_BOARD_SIZE = 3;
-const MAXIMUM_BOARD_SIZE = 30;
+const MAXIMUM_BOARD_SIZE = 32;
 const WINNING_LINE_LENGTH = 3;
 const MINIMUM_WINNING_LINE_LENGTH = 3;
 
@@ -400,7 +400,7 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
    winningLineLengthInput.value = defaultWinningLineLength;
    winningLineLengthInput.required = true;
    winningLineLengthInput.addEventListener("focus", event => event.target.select());
-   
+
    const startElement = rootElement.createElement("button");
    formElement.appendChild(startElement);
 
