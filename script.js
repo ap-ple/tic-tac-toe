@@ -295,7 +295,7 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
       symbolField.appendChild(symbolLabel);
 
       symbolLabel.innerText = "Symbol";
-      symbolLabel.htmlFor = nameID;
+      symbolLabel.htmlFor = symbolID;
 
       const symbolInput = rootElement.createElement("input");
       symbolField.appendChild(symbolInput);
