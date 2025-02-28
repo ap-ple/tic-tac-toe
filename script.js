@@ -215,20 +215,20 @@ const gameForm = (function(rootElement, parentElement, defaultSymbols, defaultBo
          if (key.match(/^player-\d-name$/)) {
             playerName = value;
          }
-         if (key.match(/^player-\d-symbol$/)) {
+         else if (key.match(/^player-\d-symbol$/)) {
             if (symbols.indexOf(value) > -1) {
                messageWarning("Symbols must be unique");
                return;
             }
             symbols.push(value);
-            
+
             players.push(new Player(playerName, value));
             playerName = null;
          }
-         if (key.match("board-size")) {
+         else if (key.match("board-size")) {
             boardSize = Number(value);
          }
-         if (key.match("winning-line-length")) {
+         else if (key.match("winning-line-length")) {
             winningLineLength = Number(value);
          }
       }
