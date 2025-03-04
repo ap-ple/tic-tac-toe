@@ -28,9 +28,9 @@ const Gameboard = function(rootElement, parentElement, boardSize, winningLineLen
    const spaceAtCoordinate = (x, y) => board[x + y * boardSize];
 
    const setNextSymbol = (symbol) => {
-      board.forEach(spaceElement => {
+      for (const spaceElement of board) {
          spaceElement.setAttribute("data-next-symbol", symbol);
-      });
+      };
    }
 
    const win = (spaceElement) => {
@@ -94,16 +94,16 @@ const Gameboard = function(rootElement, parentElement, boardSize, winningLineLen
       
       let winningLineFound = false;
 
-      linesArray.forEach(lineElements => {
+      for (const lineElements of linesArray) {
          lineElements
          .filter(line => line.length >= winningLineLength)
          .forEach(line => {
             winningLineFound = true;
-            line.forEach(element => {
+            for (const element of line) {
                element.classList.add("winning")
-            });
+            };
          });
-      });
+      };
 
       return winningLineFound;
    }
@@ -166,9 +166,9 @@ const Game = function(rootElement, parentElement, gameboard, players) {
       gameboard.setNextSymbol(playerThisTurn().symbol);
    }
 
-   gameboard.board.forEach(spaceElement => {
+   for (const spaceElement of gameboard.board) {
       spaceElement.addEventListener("click", event => play(spaceElement));
-   });
+   };
 
    return {startGame};
 };
